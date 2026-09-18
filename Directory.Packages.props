@@ -1,7 +1,8 @@
 <Project>
 
   <!--
-    Единое управление версиями пакетов. 
+    Единое управление версиями пакетов: версия объявляется здесь один раз,
+    в .csproj пишется только имя. 
   -->
 
   <PropertyGroup>
@@ -9,66 +10,12 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
-    <PackageVersion Include="Serilog.AspNetCore" Version="10.0.0" />
-    <PackageVersion Include="Serilog.Extensions.Hosting" Version="10.0.0" />
-    <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
-    <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
-    <PackageVersion Include="Serilog.Sinks.OpenTelemetry" Version="4.2.0" />
-    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.2.3" />
-  </ItemGroup>
-
-  <ItemGroup Label="Сборка приложения — только слои Composition и хост">
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.12" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.12" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.12" />
-    <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.12" />
-  </ItemGroup>
-
-  <ItemGroup Label="Доступ к данным — только слой Adapters (D-79, D-80)">
-    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
-    <PackageVersion Include="Npgsql" Version="10.0.3" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.12" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.12" />
-  </ItemGroup>
-
-  <ItemGroup Label="Брокер — только слой Adapters (D3)">
-    <PackageVersion Include="RabbitMQ.Client" Version="7.2.2" />
-  </ItemGroup>
-
-  <ItemGroup Label="Замеры — слои Composition и хост (D1)">
-    <!-- Часть .NET: даёт IMeterFactory и его регистрацию. Сами замеры
-         пишутся System.Diagnostics.Metrics из среды, без пакета. -->
-    <PackageVersion Include="Microsoft.Extensions.Diagnostics" Version="10.0.12" />
-  </ItemGroup>
-
-  <ItemGroup Label="Экспорт телеметрии — только хост (D1)">
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.18.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.18.0" />
-    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.18.0" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.12" />
-  </ItemGroup>
-
-  <ItemGroup Label="Фоновая служба — только слой Adapters (C4)">
-    <!-- Часть самого .NET, поставляется вместе с ним Транзитивно тянет DependencyInjection.Abstractions
-         и Logging.Abstractions — то же семейство, уже присутствующее. -->
-    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.12" />
-  </ItemGroup>
-
-  <ItemGroup Label="Только тестовые проекты">
-    <PackageVersion Include="xunit.v3" Version="3.1.0" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <!-- Разбор сборок без их загрузки в исполняющую среду. Пакет Microsoft,
-         назначение узкое, заменяется чтением метаданных вручную. -->
-    <PackageVersion Include="System.Reflection.MetadataLoadContext" Version="10.0.0" />
-    <!-- база для интеграционных тестов поднимается самим тестом. -->
-    <PackageVersion Include="Testcontainers.PostgreSql" Version="4.15.0" />
-    <!-- для брокера: проверка поднимает настоящий RabbitMQ. -->
-    <PackageVersion Include="Testcontainers.RabbitMq" Version="4.15.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.12" />
+  <ItemGroup Label="Анализ оформления — все проекты, кроме тестовых">
+    <!--
+      Стабильная ветка остановилась на 1.1.118 (2019);
+      1.2.0-beta.556 — самая свежая из существующих.
+    -->
+    <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
   </ItemGroup>
 
 </Project>
