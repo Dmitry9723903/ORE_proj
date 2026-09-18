@@ -1,0 +1,1 @@
+Observation, Reasoning, Evidence, Effect  = ORE
