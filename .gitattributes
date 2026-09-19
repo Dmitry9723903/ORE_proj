@@ -1,0 +1,11 @@
+# Переводы строк в репозитории, а не машине.(разработка на винде в vs и на арче в nvim)
+* text=auto eol=lf
+
+# Этим нужен CRLF на Windows
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Бинарные: git их не преобразует
+*.png binary
+*.jpg binary
+*.ico binary
