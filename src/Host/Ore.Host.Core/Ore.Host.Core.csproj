@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" />
+    <ProjectReference Include="..\..\Platform\Ore.Platform\Ore.Platform.csproj" />
   </ItemGroup>
 
 </Project>

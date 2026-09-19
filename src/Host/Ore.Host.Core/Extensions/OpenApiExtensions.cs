@@ -1,7 +1,10 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi;
+using Ore.Platform.Time;
 
 namespace Ore.Host.Core.Extensions
 {
@@ -24,7 +27,24 @@ namespace Ore.Host.Core.Extensions
         {
             ArgumentNullException.ThrowIfNull(services);
 
-            services.AddOpenApi();
+            services.AddOpenApi(options =>
+
+                // Типы-значения Platform передаются строкой, своим
+                // конвертером, и билдеру описания он не виден: у
+                // ObservedAt в схеме оставался только текст документации,
+                // у BusinessDate — пустой объект. Потребитель из такого
+                // описания не узнаёт о форме значения НИЧЕГО, то есть
+                // описание не корректно в отсутствии описания.
+                options.AddSchemaTransformer((schema, context, _) =>
+                {
+                    if (WireFormat(context.JsonTypeInfo.Type) is { } format)
+                    {
+                        schema.Type = JsonSchemaType.String;
+                        schema.Format = format;
+                    }
+
+                    return Task.CompletedTask;
+                }));
 
             return services;
         }
@@ -53,5 +73,19 @@ namespace Ore.Host.Core.Extensions
 
             return app;
         }
+
+        /// <summary>
+        /// Каким форматом строки тип-значение передается. Перечень
+        /// закрыт и пополняется осознанно.
+        /// </summary>
+        /// <param name="type">Тип, попавший в описание.</param>
+        /// <returns>Формат строки или <c>null</c>, если тип обычный.</returns>
+        private static string? WireFormat(Type type) => (Nullable.GetUnderlyingType(type) ?? type) switch
+        {
+            var t when t == typeof(ObservedAt) => "date-time",
+            var t when t == typeof(OccurredAt) => "date-time",
+            var t when t == typeof(BusinessDate) => "date",
+            _ => null,
+        };
     }
 }

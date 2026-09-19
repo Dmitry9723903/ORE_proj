@@ -17,6 +17,12 @@
     -->
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     </ItemGroup>
+
+  <ItemGroup Label="Только тестовые проекты">
+    <PackageVersion Include="xunit.v3" Version="3.1.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+  </ItemGroup>
   
   <ItemGroup Label="Описание опубликованного контракта — только хост">
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />

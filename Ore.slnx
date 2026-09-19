@@ -1,6 +1,9 @@
 <Solution>
 <Folder Name="/src/" >
-  <Project Path="src/Host/Ore.Host.Core/Ore.Host.Core.csproj" />
+<Project Path="src/Host/Ore.Host.Core/Ore.Host.Core.csproj" />
+<Project Path="src/Platform/Ore.Platform/Ore.Platform.csproj" />
 </Folder>
-  <Folder Name="/test/" />
+  <Folder Name="/test/">
+    <Project Path="test/Ore.Platform.Tests/Ore.Platform.Tests.csproj" />
+  </Folder>
 </Solution>
