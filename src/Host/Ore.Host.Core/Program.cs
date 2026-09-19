@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Ore.Host.Core.Extensions;
+using Serilog;
 
 namespace Ore.Host.Core
 {
@@ -19,15 +20,19 @@ namespace Ore.Host.Core
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Logging.AddOreLogging();
+            builder.AddOreLogging("ore-core");
 
             builder.Services.AddOreControllers();
             builder.Services.AddOreCors();
             builder.Services.AddOreOpenApi();
             builder.Services.AddOreHealthChecks();
+            builder.Services.AddProblemDetails();
 
             var app = builder.Build();
 
+            app.UseSerilogRequestLogging();
+            app.UseExceptionHandler();
+            app.UseStatusCodePages();
             app.UseOreOpenApi(app.Environment);
             app.UseCors(CorsExtensions.AllowAll);
             app.MapControllers();

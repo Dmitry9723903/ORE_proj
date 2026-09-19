@@ -16,7 +16,11 @@
       1.2.0-beta.556 — самая свежая из существующих.
     -->
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
-    </ItemGroup>
+  </ItemGroup>
+
+  <ItemGroup Label="Логирование — только хост">
+    <PackageVersion Include="Serilog.AspNetCore" Version="10.0.0" />
+  </ItemGroup>
 
   <ItemGroup Label="Только тестовые проекты">
     <PackageVersion Include="xunit.v3" Version="3.1.0" />
