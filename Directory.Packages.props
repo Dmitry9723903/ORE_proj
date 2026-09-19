@@ -16,6 +16,11 @@
       1.2.0-beta.556 — самая свежая из существующих.
     -->
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
+    </ItemGroup>
+  
+  <ItemGroup Label="Описание опубликованного контракта — только хост">
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.2.3" />
   </ItemGroup>
 
 </Project>
