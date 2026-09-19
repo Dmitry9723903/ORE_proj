@@ -14,7 +14,7 @@ namespace Ore.Host.Core.Extensions
         /// Проверки внешних зависимостей добавляются вместе с ними.
         /// </summary>
         /// <param name="services">Набор служб хоста.</param>
-        /// <returns>возвращает это же</returns>
+        /// <returns>возвращает это же.</returns>
         public static IServiceCollection AddOreHealthChecks(this IServiceCollection services)
         {
             ArgumentNullException.ThrowIfNull(services);

@@ -12,7 +12,7 @@ namespace Ore.Host.Core.Extensions
         /// Заводит логи: вывод в консоль, (в планах в файл и в опенсерч), время в UTC.
         /// </summary>
         /// <param name="builder">билдер логов хоста.</param>
-        /// <returns>реализатор-билдер</returns>
+        /// <returns>реализатор-билдер.</returns>
         public static ILoggingBuilder AddOreLogging(this ILoggingBuilder builder)
         {
             ArgumentNullException.ThrowIfNull(builder);
