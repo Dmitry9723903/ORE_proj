@@ -1,4 +1,6 @@
 <Solution>
-  <Folder Name="/src/" />
+<Folder Name="/src/" >
+  <Project Path="src/Host/Ore.Host.Core/Ore.Host.Core.csproj" />
+</Folder>
   <Folder Name="/test/" />
 </Solution>
